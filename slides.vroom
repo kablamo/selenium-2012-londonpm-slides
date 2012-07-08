@@ -1,0 +1,423 @@
+---- config
+title: Selenium and Perl
+indent: 5
+#height: 19
+#width: 69
+auto_size: 1
+#skip: 0
+
+
+
+
+----
+== Selenium and Perl
+== Eric Johnson (@kablamo)
+
+
+----
+== What is Selenium?
+
++- Written in Java
++- Similar to Test::WWW::Mechanize
++- But tests at the browser level
++- Controls the browser using JavaScript
++- Tests your site in any browser
+
+
+----
+== Selenium IDE
+
++- Firefox plugin
++- Designer can create tests
++- Records your actions in the browser
++- Replays them
+
+
+----
+== Demo
+
+
+----
+== Problems
+
++- Unreliable tests
++- It's not Perl (its Selenese)
++- Repetition: can't easily use libraries
++- Lack of automation
+
+
+----
+== Unreliable tests
+
++problem: waitForPageToLoad
+         does not handle ajax requests
+
++solution: waitForTextPresent
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+- Repetition: can't easily use libraries
+- Lack of automation
+
+
+----
+== Test::WWW::Selenium
+
+
+----
+== 4 ingredients
+
++1. Perl test
++2. Selenium server
++3. Web browser
++4. Website
+
+
+---- perl,i2
+use Test::Most;
+use Test::WWW::Selenium;
+
+my $s = Test::WWW::Selenium->new( 
+    host           => "localhost",
+    port           => 4444,
+    browser        => "*firefox",
+    browser_url    => "http://localhost:5000",
+);
+
+$s->open_ok("/index.tt");
+$s->wait_for_page_to_load_ok;
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+- Repetition: can't easily use libraries
+- Lack of automation
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+- Repetition: can't easily use libraries
+- Designers can't easily write tests
+- Lack of automation
+
+
+---- perl,i2
+use Test::Most;
+use Test::WWW::Selenium;
+
+my $s = Test::WWW::Selenium->new( 
+    host           => "localhost",
+    port           => 4444,
+    browser        => "*firefox",
+    browser_url    => "http://localhost:5000",
+);
+
+$s->open_ok("/index.tt");
+$s->wait_for_page_to_load_ok;
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;
+
+
+---- perl,i2
+use Test::Most;
+use MySelenium
+
+my $s = MySelenium->new;
+
+$s->open_ok("/index.tt");
+$s->wait_for_page_to_load_ok;
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;
+
+
+---- perl,i2
+package MySelenium;
+use Moose;
+extend 'Test::WWW::Selenium';
+
+
+----
+== Unfortunately
+
++== Can't extend non Moose libraries with Moose
+
+
+---- 
+== Fortunately
+
++== MooseX::NonMoose can extend non Moose libraries
+
+
+---- perl,i2
+package MySelenium;
+use Moose;
+use MooseX::NonMoose;
+extend 'Test::WWW::Selenium';
+
+
+----
+== Unfortunately
+
++== MooseX::NonMoose does not work on parents that
++== use AUTOLOAD.  
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+- Repetition: can't easily use libraries
+- Designers can't easily write tests
+- Lack of automation
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+- Repetition: can't easily use libraries
+- Designers can't easily write tests
+- Can't easily extend Test::WWW::Selenium
+- Lack of automation
+
+
+----
+== Fortunately
+
++== Test::WWW::Selenium::More
+
+
+---- perl,i2
+package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (
+    is      => 'rw', 
+    isa     => 'Str',
+    default => 'http://localhost:5000'
+);
+
+no Moose;
+
+
+---- perl,i2
+use Test::Most;
+use MySelenium;
+
+my $s = MySelenium->new;
+
+$s->note('Are there enough cat pictures?');
+$s->open_ok("/index.tt");
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;
+
+
+---- perl,i2
+use Test::Most;
+use MySelenium;
+
+my $s = MySelenium->new;
+
+$s->note('Are there enough cat pictures?');
+$s->open_ok("/index.tt");
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+$s->note('Check results as a logged in user');
+$s->login_ok('bob');
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;
+
+
+---- perl,i2
+package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (
+    is      => 'rw', 
+    isa     => 'Str', 
+    default => 'http://localhost:5000'
+);
+
+sub login_ok {
+    my ($self, $username, $password) = @_;
+    $self->open_ok('/login.tt');
+    $self->type_ok(username => $username);
+    $self->type_ok(password => $password);
+    $self->click_ok('login');
+}
+
+no Moose;
+
+
+---- perl,i2
+package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+with 'MySelenium::Roles::Authentication';
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (
+    is      => 'rw', 
+    isa     => 'Str', 
+    default => 'http://localhost:5000'
+);
+
+no Moose;
+
+
+---- perl,i2
+package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+with 'MySelenium::Roles::Authentication';
+with 'MySelenium::Roles::Payments';
+# etc
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (
+    is      => 'rw', 
+    isa     => 'Str', 
+    default => 'http://localhost:5000'
+);
+
+no Moose;
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+x Repetition: can't easily use libraries
+x Can't easily extend Test::WWW::Selenium
+- Designers can't easily write tests
+- Lack of automation
+
+
+----
+== Test::WWW::Selenium::More
+
++- Method chaining
+
+
+---- perl,i2
+use Test::Most;
+use MySelenium;
+
+MySelenium->new
+
+  ->note('Are there enough cat pictures?')
+  ->open_ok("/index.tt")
+  ->type_ok(searchInput => "cat pictures")
+  ->click_ok("searchButton")
+  ->wait_for_page_to_load_ok
+  ->is_text_present_ok('2 bajillion results')
+
+  ->note('Check results as a logged in user')
+  ->login_ok('bob')
+  ->is_text_present_ok('2 bajillion results');
+
+done_testing;
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+x Repetition: can't easily use libraries
+x Can't easily extend Test::WWW::Selenium
+~ Designers can't easily write tests
+- Lack of automation
+
+
+----
+== Jenkins
++- Written in Java
++- cron with a web interface and features
++- The moose dev team uses it
+
+
+----
+== Problems
+
+x Unreliable tests
+x It's not Perl (its Selenese)
+x Repetition: can't easily use libraries
+x Can't easily extend Test::WWW::Selenium
+~ Designers can't easily write tests
+x Lack of automation
+
+
+----
+== The End
+
+
+---- center
+Links
+
+Test::WWW::Selenium::More
+http://github.com/kablamo/Test-WWW-Selenium-More
+
+Selenium reference (locators + api)
+http://cavaliere.org/sandbox/selenium_api_reference
+
+This talk
+http://kablamo.github.com/talk-SeleniumAndPerl
+
+kablamo
+http://kablamo.org
+
+
+----
+== Bonus slide
+
+== https://saucelabs.com/
+
+
