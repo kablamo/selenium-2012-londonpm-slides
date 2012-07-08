@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>010.pl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "009z" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "011" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+  use Test::Most;
+  use Test::WWW::Selenium;
+  
+  my $s = Test::WWW::Selenium-&gt;new( 
+      host           =&gt; &quot;localhost&quot;,
+      port           =&gt; 4444,
+      browser        =&gt; &quot;*firefox&quot;,
+      browser_url    =&gt; &quot;http://localhost:5000&quot;,
+  );
+  
+  $s-&gt;open_ok(&quot;/index.tt&quot;);
+  $s-&gt;wait_for_page_to_load_ok;
+  $s-&gt;type_ok(searchInput =&gt; &quot;cat pictures&quot;);
+  $s-&gt;click_ok(&quot;searchButton&quot;);
+  $s-&gt;wait_for_page_to_load_ok;
+  $s-&gt;is_text_present_ok('2 bajillion results');
+  
+  done_testing;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</body>

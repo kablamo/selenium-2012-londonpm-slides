@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>031.pl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "030z" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "032" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+  use Test::Most;
+  use MySelenium;
+  
+  MySelenium-&gt;new
+  
+    -&gt;note('Are there enough cat pictures?')
+    -&gt;open_ok(&quot;/index.tt&quot;)
+    -&gt;type_ok(searchInput =&gt; &quot;cat pictures&quot;)
+    -&gt;click_ok(&quot;searchButton&quot;)
+    -&gt;wait_for_page_to_load_ok
+    -&gt;is_text_present_ok('2 bajillion results')
+  
+    -&gt;note('Check results as a logged in user')
+    -&gt;login_ok('bob')
+    -&gt;is_text_present_ok('2 bajillion results');
+  
+  done_testing;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</body>
