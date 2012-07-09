@@ -288,7 +288,7 @@ $s->wait_for_page_to_load_ok;
 $s->is_text_present_ok('2 bajillion results');
 
 $s->note('Check results as a logged in user');
-$s->login_ok('bob');
+$s->login_ok('bob'); # not in the Selenium API
 $s->is_text_present_ok('2 bajillion results');
 
 done_testing;
@@ -388,7 +388,7 @@ MySelenium->new
   ->is_text_present_ok('2 bajillion results')
 
   ->note('Check results as a logged in user')
-  ->login_ok('bob')
+  ->login_ok('bob') # not in the Selenium API
   ->is_text_present_ok('2 bajillion results');
 
 done_testing;
