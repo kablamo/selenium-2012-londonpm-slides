@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# This script is experimental. Please understand it before you run it on
+# your system. Just because it works for Ingy, doesn't mean it will work
+# for you.
+
+if [ -e "/tmp/html" ]; then
+    echo "Error: /tmp/html already exists. Perhaps remove it."
+    exit 13
+fi
+
+# Create HTML slides.
+vroom --html || exit 1
+# Move the html directory to /tmp
+mv html /tmp || exit 1
+# Stash any local stuff that isn't committed.
+git stash || exit 1
+# Switch to your gh-pages branch. (That you already created. Right?)
+git checkout gh-pages || exit 1
+# Remove all the html files from the gh-pages branch.
+rm -f *.html || exit 1
+# Move the HTML slides in here.
+mv /tmp/html/* . || exit 1
+# Remove the html directory from /tmp
+rmdir /tmp/html || exit 1
+# Add any new files to git.
+git add 0* index.html || exit 1
+# Commit your changes.
+git commit -am 'Publish my slides' || exit 1
+# Push them to GitHub.
+git push origin gh-pages || exit 1
+# Switch back to the master branch.
+git checkout master || exit 1
+# Get your uncommitted changes back.
+git stash pop || exit 1
+
+# Voilà! (hopefully)
