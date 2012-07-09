@@ -41,7 +41,7 @@ auto_size: 1
 == Problems
 
 +- Unreliable tests
-+- It's not Perl (its Selenese)
++- It's not Perl (it's Selenese)
 +- Repetition: can't easily use libraries
 +- Lack of automation
 
@@ -59,7 +59,7 @@ auto_size: 1
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 - Repetition: can't easily use libraries
 - Lack of automation
 
@@ -102,7 +102,7 @@ done_testing;
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 - Repetition: can't easily use libraries
 - Lack of automation
 
@@ -111,7 +111,7 @@ x It's not Perl (its Selenese)
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 - Repetition: can't easily use libraries
 - Designers can't easily write tests
 - Lack of automation
@@ -190,7 +190,7 @@ extend 'Test::WWW::Selenium';
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 - Repetition: can't easily use libraries
 - Designers can't easily write tests
 - Lack of automation
@@ -200,7 +200,7 @@ x It's not Perl (its Selenese)
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 - Repetition: can't easily use libraries
 - Designers can't easily write tests
 - Can't easily extend Test::WWW::Selenium
@@ -333,7 +333,7 @@ no Moose;
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 x Repetition: can't easily use libraries
 x Can't easily extend Test::WWW::Selenium
 - Designers can't easily write tests
@@ -370,7 +370,7 @@ done_testing;
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 x Repetition: can't easily use libraries
 x Can't easily extend Test::WWW::Selenium
 ~ Designers can't easily write tests
@@ -388,7 +388,7 @@ x Can't easily extend Test::WWW::Selenium
 == Problems
 
 x Unreliable tests
-x It's not Perl (its Selenese)
+x It's not Perl (it's Selenese)
 x Repetition: can't easily use libraries
 x Can't easily extend Test::WWW::Selenium
 ~ Designers can't easily write tests
