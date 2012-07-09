@@ -20,7 +20,7 @@ auto_size: 1
 +- Written in Java
 +- Similar to Test::WWW::Mechanize
 +- But tests at the browser level
-+- Controls the browser using JavaScript
++- Exercises your JavaScript
 +- Tests your site in any browser
 
 
@@ -59,7 +59,7 @@ auto_size: 1
 == Problems
 
 x Unreliable tests
-x It's not Perl (it's Selenese)
+- It's not Perl (it's Selenese)
 - Repetition: can't easily use libraries
 - Lack of automation
 
@@ -163,13 +163,15 @@ extend 'Test::WWW::Selenium';
 ----
 == Unfortunately
 
-+== Can't extend non Moose libraries with Moose
++== Can't extend non Moose libraries 
+== with Moose
 
 
 ---- 
 == Fortunately
 
-+== MooseX::NonMoose can extend non Moose libraries
++== MooseX::NonMoose can extend 
+== non Moose libraries
 
 
 ---- perl,i2
@@ -182,8 +184,8 @@ extend 'Test::WWW::Selenium';
 ----
 == Unfortunately
 
-+== MooseX::NonMoose does not work on parents that
-+== use AUTOLOAD.  
++== MooseX::NonMoose does not work on 
+== parents that use AUTOLOAD
 
 
 ----
