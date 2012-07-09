@@ -12,7 +12,7 @@ function navigate(e) {
         return false;
     }
     if (keynum == 13 || keynum == 32) {
-        window.location = "029" + ".html";
+        window.location = "029.pl" + ".html";
         return false;
     }
     if (keynum == 73 || keynum == 105) {
@@ -36,12 +36,11 @@ function navigate(e) {
 
 
 
+
   package MySelenium;
   use Moose;
   extends 'Test::WWW::Selenium::More';
   with 'MySelenium::Roles::Authentication';
-  with 'MySelenium::Roles::Payments';
-  # etc
   
   has host        =&gt; (...);
   has port        =&gt; (...);
@@ -53,6 +52,7 @@ function navigate(e) {
   );
   
   no Moose;
+
 
 
 

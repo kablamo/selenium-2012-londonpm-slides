@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>010.pl</title>
+<title>011.pl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 function navigate(e) {
@@ -8,11 +8,11 @@ function navigate(e) {
         ? e.keyCode
         : e.which;
     if (keynum == 8) {
-        window.location = "009z" + ".html";
+        window.location = "010.pl" + ".html";
         return false;
     }
     if (keynum == 13 || keynum == 32) {
-        window.location = "011.pl" + ".html";
+        window.location = "012" + ".html";
         return false;
     }
     if (keynum == 73 || keynum == 105) {
@@ -33,9 +33,6 @@ function navigate(e) {
 
 
 
-
-
-
   use Test::Most;
   use Test::WWW::Selenium;
   
@@ -47,15 +44,18 @@ function navigate(e) {
   );
   
   $s-&gt;open_ok(&quot;/index.tt&quot;);
+  sleep 2;
   $s-&gt;wait_for_page_to_load_ok;
+  sleep 2;
   $s-&gt;type_ok(searchInput =&gt; &quot;cat pictures&quot;);
+  sleep 2;
   $s-&gt;click_ok(&quot;searchButton&quot;);
+  sleep 2;
   $s-&gt;wait_for_page_to_load_ok;
+  sleep 2;
   $s-&gt;is_text_present_ok('2 bajillion results');
   
   done_testing;
-
-
 
 
 

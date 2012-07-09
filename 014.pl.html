@@ -8,7 +8,7 @@ function navigate(e) {
         ? e.keyCode
         : e.which;
     if (keynum == 8) {
-        window.location = "013.pl" + ".html";
+        window.location = "013" + ".html";
         return false;
     }
     if (keynum == 13 || keynum == 32) {
@@ -36,12 +36,15 @@ function navigate(e) {
 
 
 
-
-
   use Test::Most;
-  use MySelenium
+  use Test::WWW::Selenium;
   
-  my $s = MySelenium-&gt;new;
+  my $s = Test::WWW::Selenium-&gt;new( 
+      host           =&gt; &quot;localhost&quot;,
+      port           =&gt; 4444,
+      browser        =&gt; &quot;*firefox&quot;,
+      browser_url    =&gt; &quot;http://localhost:5000&quot;,
+  );
   
   $s-&gt;open_ok(&quot;/index.tt&quot;);
   $s-&gt;wait_for_page_to_load_ok;
@@ -51,9 +54,6 @@ function navigate(e) {
   $s-&gt;is_text_present_ok('2 bajillion results');
   
   done_testing;
-
-
-
 
 
 

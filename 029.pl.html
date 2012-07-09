@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>023.pl</title>
+<title>029.pl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 function navigate(e) {
@@ -8,11 +8,11 @@ function navigate(e) {
         ? e.keyCode
         : e.which;
     if (keynum == 8) {
-        window.location = "022z" + ".html";
+        window.location = "028.pl" + ".html";
         return false;
     }
     if (keynum == 13 || keynum == 32) {
-        window.location = "024.pl" + ".html";
+        window.location = "030" + ".html";
         return false;
     }
     if (keynum == 73 || keynum == 105) {
@@ -36,23 +36,23 @@ function navigate(e) {
 
 
 
-
-
   package MySelenium;
   use Moose;
   extends 'Test::WWW::Selenium::More';
+  with 'MySelenium::Roles::Authentication';
+  with 'MySelenium::Roles::Payments';
+  # etc
   
   has host        =&gt; (...);
   has port        =&gt; (...);
   has browser     =&gt; (...);
   has browser_url =&gt; (
       is      =&gt; 'rw', 
-      isa     =&gt; 'Str',
+      isa     =&gt; 'Str', 
       default =&gt; 'http://localhost:5000'
   );
   
   no Moose;
-
 
 
 

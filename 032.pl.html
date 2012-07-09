@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>031.pl</title>
+<title>032.pl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
 function navigate(e) {
@@ -8,11 +8,11 @@ function navigate(e) {
         ? e.keyCode
         : e.which;
     if (keynum == 8) {
-        window.location = "030z" + ".html";
+        window.location = "031z" + ".html";
         return false;
     }
     if (keynum == 13 || keynum == 32) {
-        window.location = "032" + ".html";
+        window.location = "033" + ".html";
         return false;
     }
     if (keynum == 73 || keynum == 105) {
@@ -49,7 +49,7 @@ function navigate(e) {
     -&gt;is_text_present_ok('2 bajillion results')
   
     -&gt;note('Check results as a logged in user')
-    -&gt;login_ok('bob')
+    -&gt;login_ok('bob') # not in the Selenium API
     -&gt;is_text_present_ok('2 bajillion results');
   
   done_testing;
