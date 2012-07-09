@@ -1,9 +1,9 @@
 ---- config
 title: Selenium and Perl
 indent: 5
-#height: 19
-#width: 69
-auto_size: 1
+height: 18
+width: 58
+#auto_size: 1
 #skip: 0
 
 
