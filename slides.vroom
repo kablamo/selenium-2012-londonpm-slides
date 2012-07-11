@@ -409,27 +409,6 @@ MySelenium->new
 done_testing;
 
 
----- perl,i0
-use Test::Most;
-use MySelenium;
-
-my $s = MySelenium->new(slow => 2000)
-
-  ->note('Are there enough cat pictures?')
-  ->open_ok("/index.tt")
-  ->type_ok(searchInput => "cat pictures")
-  ->click_ok("searchButton")
-  ->wait_for_page_to_load_ok
-  ->is_text_present_ok('2 bajillion results')
-
-  ->note('Check results as a logged in user')
-; sleep 2; $s
-  ->login_ok('bob') # not in the Selenium API
-  ->is_text_present_ok('2 bajillion results');
-
-done_testing;
-
-
 ----
 == Problems
 
