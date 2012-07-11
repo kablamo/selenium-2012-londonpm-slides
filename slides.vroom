@@ -1,9 +1,23 @@
 ---- config
 title: Selenium and Perl
-indent: 5
-height: 18
-width: 58
-#auto_size: 1
+
+# 1024 x 768
+#height: 16
+#indent: 2
+#width: 45
+# (replace i2 with i0)
+
+# 1280 x 800
+#height: 18
+#indent: 5
+#width: 58
+# (replace i0 with i2)
+
+# auto size
+indent: 2
+auto_size: 1
+
+
 #skip: 0
 
 
@@ -77,7 +91,7 @@ x Unreliable tests
 +4. Website
 
 
----- perl,i2
+---- perl,i0
 use Test::Most;
 use Test::WWW::Selenium;
 
@@ -98,7 +112,7 @@ $s->is_text_present_ok('2 bajillion results');
 done_testing;
 
 
----- perl,i2
+---- perl,i0
 use Test::Most;
 use Test::WWW::Selenium;
 
@@ -143,7 +157,7 @@ x It's not Perl (it's Selenese)
 - Lack of automation
 
 
----- perl,i2
+---- perl,i0
 use Test::Most;
 use Test::WWW::Selenium;
 
@@ -164,7 +178,7 @@ $s->is_text_present_ok('2 bajillion results');
 done_testing;
 
 
----- perl,i2
+---- perl,i0
 use Test::Most;
 use MySelenium
 
@@ -180,7 +194,7 @@ $s->is_text_present_ok('2 bajillion results');
 done_testing;
 
 
----- perl,i2
+---- perl,i0
 package MySelenium;
 use Moose;
 extend 'Test::WWW::Selenium';
@@ -200,7 +214,7 @@ extend 'Test::WWW::Selenium';
 == non Moose libraries
 
 
----- perl,i2
+---- perl,i0
 package MySelenium;
 use Moose;
 use MooseX::NonMoose;
@@ -241,7 +255,7 @@ x It's not Perl (it's Selenese)
 +== Test::WWW::Selenium::More
 
 
----- perl,i2
+---- perl,i0
 package MySelenium;
 use Moose;
 extends 'Test::WWW::Selenium::More';
@@ -258,7 +272,7 @@ has browser_url => (
 no Moose;
 
 
----- perl,i2
+---- perl,i0
 use Test::Most;
 use MySelenium;
 
@@ -274,7 +288,7 @@ $s->is_text_present_ok('2 bajillion results');
 done_testing;
 
 
----- perl,i2
+---- perl,i0
 use Test::Most;
 use MySelenium;
 
@@ -294,7 +308,7 @@ $s->is_text_present_ok('2 bajillion results');
 done_testing;
 
 
----- perl,i2
+---- perl,i0
 package MySelenium;
 use Moose;
 extends 'Test::WWW::Selenium::More';
@@ -319,7 +333,7 @@ sub login_ok {
 no Moose;
 
 
----- perl,i2
+---- perl,i0
 package MySelenium;
 use Moose;
 extends 'Test::WWW::Selenium::More';
@@ -337,7 +351,7 @@ has browser_url => (
 no Moose;
 
 
----- perl,i2
+---- perl,i0
 package MySelenium;
 use Moose;
 extends 'Test::WWW::Selenium::More';
@@ -374,7 +388,7 @@ x Can't easily extend Test::WWW::Selenium
 +- Method chaining
 
 
----- perl,i2
+---- perl,i0
 use Test::Most;
 use MySelenium;
 
@@ -388,6 +402,27 @@ MySelenium->new
   ->is_text_present_ok('2 bajillion results')
 
   ->note('Check results as a logged in user')
+  ->login_ok('bob') # not in the Selenium API
+  ->is_text_present_ok('2 bajillion results');
+
+done_testing;
+
+
+---- perl,i0
+use Test::Most;
+use MySelenium;
+
+my $s = MySelenium->new(slow => 2000)
+
+  ->note('Are there enough cat pictures?')
+  ->open_ok("/index.tt")
+  ->type_ok(searchInput => "cat pictures")
+  ->click_ok("searchButton")
+  ->wait_for_page_to_load_ok
+  ->is_text_present_ok('2 bajillion results')
+
+  ->note('Check results as a logged in user')
+; sleep 2; $s
   ->login_ok('bob') # not in the Selenium API
   ->is_text_present_ok('2 bajillion results');
 
