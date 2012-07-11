@@ -31,6 +31,7 @@ auto_size: 1
 ----
 == What is Selenium?
 
++- A tool for testing your website
 +- Written in Java
 +- Similar to Test::WWW::Mechanize
 +- But tests at the browser level
