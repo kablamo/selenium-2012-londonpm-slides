@@ -24,27 +24,27 @@ function navigate(e) {
 </script>
 </head>
 <body onkeypress="return navigate(event)">
-<pre>  package MySelenium;
-  use Moose;
-  extends 'Test::WWW::Selenium::More';
-  
-  has host        =&gt; (...);
-  has port        =&gt; (...);
-  has browser     =&gt; (...);
-  has browser_url =&gt; (
-      is      =&gt; 'rw', 
-      isa     =&gt; 'Str', 
-      default =&gt; 'http://localhost:5000'
-  );
-  
-  sub login_ok {
-      my ($self, $username, $password) = @_;
-      $self-&gt;open_ok('/login.tt');
-      $self-&gt;type_ok(username =&gt; $username);
-      $self-&gt;type_ok(password =&gt; $password);
-      $self-&gt;click_ok('login');
-  }
-  
-  no Moose;
+<pre>package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+
+has host        =&gt; (...);
+has port        =&gt; (...);
+has browser     =&gt; (...);
+has browser_url =&gt; (
+    is      =&gt; 'rw', 
+    isa     =&gt; 'Str', 
+    default =&gt; 'http://localhost:5000'
+);
+
+sub login_ok {
+    my ($self, $username, $password) = @_;
+    $self-&gt;open_ok('/login.tt');
+    $self-&gt;type_ok(username =&gt; $username);
+    $self-&gt;type_ok(password =&gt; $password);
+    $self-&gt;click_ok('login');
+}
+
+no Moose;
 </pre>
 </body>

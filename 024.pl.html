@@ -24,22 +24,20 @@ function navigate(e) {
 </script>
 </head>
 <body onkeypress="return navigate(event)">
-<pre>
-  package MySelenium;
-  use Moose;
-  extends 'Test::WWW::Selenium::More';
-  
-  has host        =&gt; (...);
-  has port        =&gt; (...);
-  has browser     =&gt; (...);
-  has browser_url =&gt; (
-      is      =&gt; 'rw', 
-      isa     =&gt; 'Str',
-      default =&gt; 'http://localhost:5000'
-  );
-  
-  no Moose;
+<pre>package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
 
+has host        =&gt; (...);
+has port        =&gt; (...);
+has browser     =&gt; (...);
+has browser_url =&gt; (
+    is      =&gt; 'rw', 
+    isa     =&gt; 'Str',
+    default =&gt; 'http://localhost:5000'
+);
+
+no Moose;
 
 
 </pre>

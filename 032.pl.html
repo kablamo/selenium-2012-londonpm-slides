@@ -24,23 +24,22 @@ function navigate(e) {
 </script>
 </head>
 <body onkeypress="return navigate(event)">
-<pre>  use Test::Most;
-  use MySelenium;
-  
-  MySelenium-&gt;new
-  
-    -&gt;note('Are there enough cat pictures?')
-    -&gt;open_ok(&quot;/index.tt&quot;)
-    -&gt;type_ok(searchInput =&gt; &quot;cat pictures&quot;)
-    -&gt;click_ok(&quot;searchButton&quot;)
-    -&gt;wait_for_page_to_load_ok
-    -&gt;is_text_present_ok('2 bajillion results')
-  
-    -&gt;note('Check results as a logged in user')
-    -&gt;login_ok('bob') # not in the Selenium API
-    -&gt;is_text_present_ok('2 bajillion results');
-  
-  done_testing;
+<pre>use Test::Most;
+use MySelenium;
 
+MySelenium-&gt;new
+
+  -&gt;note('Are there enough cat pictures?')
+  -&gt;open_ok(&quot;/index.tt&quot;)
+  -&gt;type_ok(searchInput =&gt; &quot;cat pictures&quot;)
+  -&gt;click_ok(&quot;searchButton&quot;)
+  -&gt;wait_for_page_to_load_ok
+  -&gt;is_text_present_ok('2 bajillion results')
+
+  -&gt;note('Check results as a logged in user')
+  -&gt;login_ok('bob') # not in the Selenium API
+  -&gt;is_text_present_ok('2 bajillion results');
+
+done_testing;
 </pre>
 </body>
