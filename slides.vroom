@@ -2,9 +2,9 @@
 title: Selenium and Perl
 
 # 1024 x 768
-#height: 16
-#indent: 2
-#width: 45
+height: 16
+indent: 2
+width: 45
 # (replace i2 with i0)
 
 # 1280 x 800
@@ -14,8 +14,8 @@ title: Selenium and Perl
 # (replace i0 with i2)
 
 # auto size
-indent: 2
-auto_size: 1
+#indent: 2
+#auto_size: 1
 
 
 #skip: 0
@@ -452,7 +452,7 @@ Selenium reference (locators + api)
 http://cavaliere.org/sandbox/selenium_api_reference
 
 This talk
-http://kablamo.github.com/talk-SeleniumAndPerl
+http://kablamo.org/selenium-2012-londonpm-slides/
 
 kablamo
 http://kablamo.org
