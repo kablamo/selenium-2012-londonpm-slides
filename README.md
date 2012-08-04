@@ -1,3 +1,6 @@
+*Note:* a newer version of this talk is available here:
+http://github.org/kablamo/selenium-2012-yapceu-slides
+
 slides-2012-londonpm-selenium
 =============================
 
@@ -11,5 +14,5 @@ How to create Selenium tests with Perl.  Topics include:
 
 HTML version
 ------------
-http://kablamo.org/selenium-2012-londonpm-slides/
+http://kablamo.org/selenium-2012-londonpm-slides
 
